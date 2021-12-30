@@ -2,8 +2,6 @@ use std::fs::File;
 use std::io::prelude::*;
 
 pub fn part1(file_name: &str) -> i32 {
-    println!("Part 1");
-
     let contents = read_input(file_name);
 
     return get_increased_value_count(contents);
@@ -62,43 +60,43 @@ fn read_input(file_name: &str) -> Vec<i32> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::path::PathBuf;
+    use crate::file_names;
 
     #[test]
     fn part_one_example_works() {
-        test_part_one("input/day01-example01.txt", 7);
+        test_part_one(
+            file_names::get_file_path(file_names::DAY_01_EXAMPLE_INPUT),
+            7,
+        );
     }
 
     #[test]
     fn part_one_works() {
-        test_part_one("input/day01.txt", 1288);
+        test_part_one(file_names::get_file_path(file_names::DAY_01_INPUT), 1288);
     }
 
-    fn test_part_one(file_name: &str, expected_result: i32) {
-        let mut file_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-        file_path.push(file_name);
-
-        let part_one_result = part1(file_path.to_str().unwrap());
+    fn test_part_one(file_name: String, expected_result: i32) {
+        let part_one_result = part1(&file_name);
 
         assert_eq!(part_one_result, expected_result);
     }
 
-    fn test_part_two(file_name: &str, expected_result: i32) {
-        let mut file_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-        file_path.push(file_name);
-
-        let part_two_result = part2(file_path.to_str().unwrap());
+    fn test_part_two(file_name: String, expected_result: i32) {
+        let part_two_result = part2(&file_name);
 
         assert_eq!(part_two_result, expected_result);
     }
 
     #[test]
     fn part_two_example_works() {
-        test_part_two("input/day01-example01.txt", 5);
+        test_part_two(
+            file_names::get_file_path(file_names::DAY_01_EXAMPLE_INPUT),
+            5,
+        );
     }
 
     #[test]
     fn part_two_works() {
-        test_part_two("input/day01.txt", 1311);
+        test_part_two(file_names::get_file_path(file_names::DAY_01_INPUT), 1311);
     }
 }
